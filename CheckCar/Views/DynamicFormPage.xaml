@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CheckCar.Views.DynamicFormPage"
+             Title="Nuevo reporte">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout x:Name="Root" Padding="16" Spacing="12">
+                <Label x:Name="HeaderLabel" Style="{StaticResource SectionTitle}" />
+                <ActivityIndicator x:Name="Busy" IsRunning="True" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="1" x:Name="SaveButton" Text="Guardar"
+                Style="{StaticResource PrimaryButton}" Margin="16"
+                Clicked="OnSaveClicked" IsVisible="False" />
+    </Grid>
+</ContentPage>

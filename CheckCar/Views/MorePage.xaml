@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:svc="clr-namespace:CheckCar.Services"
+             x:Class="CheckCar.Views.MorePage"
+             Title="Más">
+    <ScrollView>
+        <VerticalStackLayout Spacing="18" Padding="16,16,16,24">
+            <Label Text="Más" Style="{StaticResource PageTitle}" />
+
+            <!-- Profile card -->
+            <Border Style="{StaticResource CardStyle}">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <Border Grid.Column="0"
+                            WidthRequest="54" HeightRequest="54"
+                            Background="{StaticResource BrandGradient}"
+                            Stroke="Transparent" VerticalOptions="Center">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="27" />
+                        </Border.StrokeShape>
+                        <Label Text="👤" FontSize="24"
+                               HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Text="Conductor" Style="{StaticResource CardTitle}" />
+                        <Label Text="Toca para iniciar sesión" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Settings list -->
+            <Border Style="{StaticResource CardStyle}" Padding="4">
+                <VerticalStackLayout>
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12" ColumnSpacing="12">
+                        <Label Grid.Column="0" Text="🔔" FontSize="20" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="Notificaciones" Style="{StaticResource CardTitle}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource Caption}" FontSize="22" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource SurfaceBorderLight}, Dark={StaticResource SurfaceBorderDark}}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12" ColumnSpacing="12">
+                        <Label Grid.Column="0" Text="🌐" FontSize="20" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                            <Label Text="Servidor / API" Style="{StaticResource CardTitle}" />
+                            <Label Text="{x:Static svc:ApiConfig.BaseUrl}" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource Caption}" FontSize="22" VerticalOptions="Center" />
+                    </Grid>
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource SurfaceBorderLight}, Dark={StaticResource SurfaceBorderDark}}" />
+                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12" ColumnSpacing="12">
+                        <Label Grid.Column="0" Text="ℹ️" FontSize="20" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="Acerca de CheckCars" Style="{StaticResource CardTitle}" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Text="›" Style="{StaticResource Caption}" FontSize="22" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="CheckCars · versión 1.0"
+                   Style="{StaticResource Caption}"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

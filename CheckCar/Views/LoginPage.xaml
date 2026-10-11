@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CheckCar.Views.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Title="Iniciar sesión">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16" VerticalOptions="Center">
+            <Label Text="🚗" FontSize="48" HorizontalOptions="Center" />
+            <Label Text="CheckCar" Style="{StaticResource PageTitle}" HorizontalOptions="Center" />
+            <Label Text="Inicia sesión para sincronizar tus reportes." Style="{StaticResource Caption}"
+                   HorizontalTextAlignment="Center" HorizontalOptions="Center" />
+
+            <Entry x:Name="EmailEntry" Placeholder="Correo" Keyboard="Email" />
+            <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" />
+
+            <Label x:Name="ErrorLabel" TextColor="{StaticResource Danger}" IsVisible="False" />
+
+            <Button x:Name="LoginButton" Text="Entrar" Style="{StaticResource PrimaryButton}" Clicked="OnLoginClicked" />
+            <ActivityIndicator x:Name="Busy" IsVisible="False" IsRunning="False" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

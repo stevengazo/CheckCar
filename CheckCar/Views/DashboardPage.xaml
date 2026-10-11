@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CheckCar.ViewModels"
+             xmlns:models="clr-namespace:CheckCar.Models"
+             x:Class="CheckCar.Views.DashboardPage"
+             x:Name="Root"
+             x:DataType="vm:DashboardViewModel"
+             Shell.NavBarIsVisible="False"
+             Title="Inicio">
+
+    <RefreshView IsRefreshing="{Binding IsBusy}"
+                 Command="{Binding RefreshCommand}">
+        <ScrollView>
+            <VerticalStackLayout Spacing="22">
+
+                <!-- Hero header -->
+                <Border Background="{StaticResource BrandGradient}"
+                        Stroke="Transparent"
+                        Padding="20,56,20,28">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0,0,28,28" />
+                    </Border.StrokeShape>
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="2">
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="{Binding Greeting}"
+                               TextColor="#DCEAFE"
+                               FontSize="15" />
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Text="{Binding UserName}"
+                               TextColor="White"
+                               FontFamily="OpenSansSemibold"
+                               FontSize="24" />
+                        <Border Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                WidthRequest="48" HeightRequest="48"
+                                BackgroundColor="#33FFFFFF"
+                                Stroke="Transparent"
+                                VerticalOptions="Center">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="24" />
+                            </Border.StrokeShape>
+                            <Label Text="🚘" FontSize="22"
+                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <!-- Stats grid -->
+                <CollectionView ItemsSource="{Binding Stats}"
+                                Margin="16,0"
+                                HeightRequest="340"
+                                SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2"
+                                         HorizontalItemSpacing="12"
+                                         VerticalItemSpacing="12" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:StatCard">
+                            <Border Style="{StaticResource CardStyle}" Padding="14">
+                                <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="2">
+                                    <Border Grid.Row="0"
+                                            WidthRequest="38" HeightRequest="38"
+                                            BackgroundColor="{Binding Accent}"
+                                            Stroke="Transparent"
+                                            HorizontalOptions="Start">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12" />
+                                        </Border.StrokeShape>
+                                        <Label Text="{Binding Glyph}" FontSize="18"
+                                               HorizontalOptions="Center" VerticalOptions="Center" />
+                                    </Border>
+                                    <Label Grid.Row="1"
+                                           Text="{Binding Value}"
+                                           Style="{StaticResource Metric}"
+                                           Margin="0,8,0,0" />
+                                    <HorizontalStackLayout Grid.Row="2" Spacing="4">
+                                        <Label Text="{Binding Title}" Style="{StaticResource CardTitle}" />
+                                        <Label Text="{Binding Caption}" Style="{StaticResource Caption}"
+                                               VerticalOptions="End" />
+                                    </HorizontalStackLayout>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Quick actions -->
+                <VerticalStackLayout Spacing="12" Margin="16,0">
+                    <Label Text="Acciones rápidas" Style="{StaticResource SectionTitle}" />
+                    <CollectionView ItemsSource="{Binding QuickActions}"
+                                    HeightRequest="112"
+                                    SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="12" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:QuickAction">
+                                <Border Style="{StaticResource CardStyle}"
+                                        Padding="14" WidthRequest="120">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding BindingContext.GoToCommand, Source={x:Reference Root}}"
+                                            CommandParameter="{Binding Route}" />
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                                        <Border WidthRequest="44" HeightRequest="44"
+                                                BackgroundColor="{Binding Accent}"
+                                                Stroke="Transparent"
+                                                HorizontalOptions="Start">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="14" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Glyph}" FontSize="20"
+                                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                                        </Border>
+                                        <Label Text="{Binding Title}" Style="{StaticResource Caption}"
+                                               TextColor="{AppThemeBinding Light={StaticResource TextPrimaryLight}, Dark={StaticResource TextPrimaryDark}}"
+                                               FontSize="13" LineBreakMode="WordWrap" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <!-- Recent activity -->
+                <VerticalStackLayout Spacing="12" Margin="16,0,16,24">
+                    <Label Text="Actividad reciente" Style="{StaticResource SectionTitle}" />
+                    <Border Style="{StaticResource CardStyle}" Padding="4">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding RecentActivity}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="models:ActivityItem">
+                                    <Grid ColumnDefinitions="Auto,*,Auto" Padding="12,12" ColumnSpacing="12">
+                                        <Border Grid.Column="0"
+                                                WidthRequest="40" HeightRequest="40"
+                                                BackgroundColor="{Binding Accent}"
+                                                Stroke="Transparent"
+                                                VerticalOptions="Center">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="12" />
+                                            </Border.StrokeShape>
+                                            <Label Text="{Binding Glyph}" FontSize="18"
+                                                   HorizontalOptions="Center" VerticalOptions="Center" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
+                                            <Label Text="{Binding Title}" Style="{StaticResource CardTitle}" />
+                                            <Label Text="{Binding Subtitle}" Style="{StaticResource Caption}" />
+                                        </VerticalStackLayout>
+                                        <Label Grid.Column="2" Text="{Binding When}"
+                                               Style="{StaticResource Caption}"
+                                               VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </RefreshView>
+
+</ContentPage>

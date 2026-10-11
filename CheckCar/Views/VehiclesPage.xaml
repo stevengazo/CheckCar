@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CheckCar.Views.VehiclesPage"
+             Title="Vehículos">
+    <Grid RowDefinitions="Auto,*">
+        <VerticalStackLayout Grid.Row="0" Padding="16,16,16,0" Spacing="4">
+            <Label Text="Vehículos" Style="{StaticResource PageTitle}" />
+            <Label Text="Gestiona la flota y revisa cada unidad." Style="{StaticResource Caption}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Spacing="14"
+                             VerticalOptions="Center" HorizontalOptions="Center"
+                             Padding="32">
+            <Border WidthRequest="84" HeightRequest="84"
+                    BackgroundColor="{StaticResource Secondary}"
+                    Stroke="Transparent" HorizontalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="42" />
+                </Border.StrokeShape>
+                <Label Text="🚙" FontSize="38"
+                       HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Label Text="Aún no hay vehículos"
+                   Style="{StaticResource SectionTitle}"
+                   HorizontalOptions="Center" />
+            <Label Text="Aquí aparecerá el listado de la flota conectado a la API."
+                   Style="{StaticResource Caption}"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
